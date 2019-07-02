@@ -1,0 +1,136 @@
+a {
+    color: #fff;
+    background-color: #333;
+    transition: all 1s ease-out;
+}
+
+a:hover,
+a:focus {
+    color: #333;
+    background-color: #fff;
+}
+
+.btn-success {
+    background: pink;
+}
+
+body {
+    background: pink;
+    background-blend-mode: screen, color-dodge;
+    background-position: right;
+    /* background: "Picture1.png"; */
+    background-color: greenyellow;
+    /* background: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQK0lv1k_Fwy45QHk1yAO-e_grIlHQtYN9rdnWjPX5byNBENCBT); */
+    background-size: cover;
+    font-size: 20px;
+    font-weight: 200;
+}
+
+#abtus {
+    font-weight: 400;
+    font-color: #000000;
+    font-size: 15px;
+    font-style: sans-serif;
+    position: bottom;
+    padding: 160px;
+    padding-left: 0%;
+    padding-right: 70%;
+    padding-bottom: 0%;
+}
+
+#logo {
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+    font-size: 60px;
+    font-color: blue;
+    font-weight: bold;
+    text-shadow: 0px 4px 3px red, 0px 8px 13px orange, 0px 18px 23px yellow;
+}
+
+.n1 {
+    font-size: 1.8em;
+    font-weight: 400;
+}
+
+.n2 {
+    font-size: 1.2em;
+}
+
+.banner {
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.dropbox {
+    height: 38px;
+    text-align: left;
+}
+
+.dropopen {
+    background-color: #FAF8BC;
+    display: inline-block;
+    float: left;
+    height: calc(100% - 20px);
+    padding-right: 4px;
+}
+
+.droplabel {
+    display: inline-block;
+    padding-left: 42px;
+    width: calc(100% - 84px);
+}
+
+.droplinks {
+    background-color: ;
+    max-height: 0;
+    overflow: auto;
+    -webkit-transition: all .5s linear;
+    -moz-transition: all .5s linear;
+    -o-transition: all .5s linear;
+    transition: all .5s linear;
+}
+
+.droplinks:target {
+    max-height: 150px;
+}
+
+.dropopena {
+    background-color: pink;
+    display: inline-block;
+    float: left;
+    height: calc(100% - 20px);
+    padding-right: 4px;
+}
+
+.droplabela {
+    display: inline-block;
+    padding-left: 42px;
+    width: calc(100% - 84px);
+}
+
+.dropboxa {
+    height: 38px;
+    text-align: left;
+}
+
+.droplinksa {
+    background-color: grey;
+    max-height: 0;
+    overflow: auto;
+    transition: all .1s linear;
+}
+
+.droplinksa:target {
+    max-height: 300px;
+    position: absolute;
+    /*left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;*/
+}
