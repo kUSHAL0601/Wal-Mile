@@ -5,7 +5,7 @@ from .models import Vehicle
 
 mod_vehicle = Blueprint('vehicle', __name__)
 
-@mod_vehicle.route('/register', methods=['POST'])
+@mod_vehicle.route('/vehicle', methods=['POST'])
 def create_vehicle():
     try:
         vehicle_no = request.form['vehicle_no']
