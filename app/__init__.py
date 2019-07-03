@@ -32,9 +32,9 @@ def requires_auth(f):
         return f(*args, **kwargs)
     return decorated
 
-@app.route('/', methods=['GET'])
-def home_page():
-    return render_template('input.html')
+# @app.route('/', methods=['GET'])
+# def home_page():
+#     return render_template('input.html')
 
 # Import a module / component using its blueprint handler variable (mod_auth)
 from app.utils.vehicles.controllers import mod_vehicle
@@ -47,6 +47,7 @@ from app.utils.client_loc.controllers import mod_clientlocation
 app.register_blueprint(mod_vehicle)
 app.register_blueprint(mod_item)
 app.register_blueprint(mod_clientlocation)
+app.register_blueprint(mod_user)
 #app.register_blueprint(mod_todo)
 
 # Build the database:
