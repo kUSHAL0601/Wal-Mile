@@ -1,6 +1,6 @@
 from flask import *
 from sqlalchemy.exc import IntegrityError
-# from app import *
+from app import *
 from .models import User
 from werkzeug.security import generate_password_hash, check_password_hash
 
