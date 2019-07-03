@@ -3,16 +3,13 @@ from sqlalchemy.exc import IntegrityError
 from app import *
 from .models import User
 from werkzeug.security import generate_password_hash, check_password_hash
-
+from copy import deepcopy
 
 mod_user = Blueprint('user', __name__)
 
 @mod_user.route('/', methods=['GET'])
 def home_page():
-    if 'user_id' in session:
-        return render_template('clientV1.html',xyz=session['user_id'])
-    else:
-        return render_template('signup.html')
+    return render_template('clientV1.html')
 
 @mod_user.route('/login', methods=['GET'])
 def login_page():
@@ -48,7 +45,7 @@ def login():
     if user is None or not user.check_password(password):
         return jsonify(success=False, message="Invalid Credentials"), 400
 
-    session['user_id'] = user.id
+    session['user_id'] = deepcopy(user.id)
 
     return jsonify(success=True, user=user.to_dict())
 
@@ -75,7 +72,8 @@ def create_user():
     except IntegrityError as e:
         return jsonify(success=False, message="This username already exists"), 400
     # print("Here1")
-    session['user_id']=u.id
+    session['user_id']=deepcopy(u.id)
+    print(session['user_id'])
     return jsonify(success=True)
 
 @mod_user.route('/edit/name',methods=['GET'])

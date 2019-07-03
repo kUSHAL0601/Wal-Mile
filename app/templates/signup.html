@@ -4,6 +4,7 @@
 <head>
     <title>Register</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>    <link href="https://fonts.googleapis.com/css?family=Alegreya" rel="stylesheet">
+<script type="text/javascript" src="../static/cookie.js"></script>
     <style type="text/css">
         h1 {
             text-align: center;
@@ -147,8 +148,9 @@ function register()
                     // alert("S")
                     if(response.success==true)
                     {
+                        setCookie("username",$('#r_name').val(),1000);
                         alert("success");
-                        window.location="http://127.0.0.1:8080/"
+                        window.location.replace("http://127.0.0.1:8080/");
 
                     }
                     else

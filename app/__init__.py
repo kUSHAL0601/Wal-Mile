@@ -12,9 +12,9 @@ from functools import wraps
 app = Flask(__name__)
 CORS(app)
 app.secret_key = 'super secret key'
+app.config.from_object('config')
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)# Configurations
-app.config.from_object('config')
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -42,8 +42,8 @@ def requires_auth(f):
 # Import a module / component using its blueprint handler variable (mod_auth)
 from app.utils.vehicles.controllers import mod_vehicle
 from app.utils.item.controllers import mod_item
-from app.utils.user.controllers import mod_user
 from app.utils.client_loc.controllers import mod_clientlocation
+from app.utils.user.controllers import mod_user
 
 
 # Register blueprint(s)

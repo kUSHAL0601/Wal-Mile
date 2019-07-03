@@ -5,7 +5,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 class ClientLocation(db.Model):
     __tablename__ = 'clientlocation'
     addr_id=db.Column(db.Integer,primary_key=True)
-    client_id = db.Column(db.Integer)
+    client_id = db.Column(db.String)
     latitude = db.Column(db.Float)
     longitude = db.Column(db.Float)
     location = db.Column(db.String(255))

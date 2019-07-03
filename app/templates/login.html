@@ -4,6 +4,7 @@
 <head>
     <title>LOGIN</title>
     <link href="https://fonts.googleapis.com/css?family=Alegreya" rel="stylesheet">
+<script type="text/javascript" src="../static/cookie.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>    <link href="https://fonts.googleapis.com/css?family=Alegreya" rel="stylesheet">
     <style type="text/css">
         h1 {
@@ -85,6 +86,7 @@
             {
                 if(response.success==true)
                 {
+                        setCookie("username",$('#l_name').val(),1000);
                     window.location = "http://127.0.0.1:8080/";
                 }
                 else
