@@ -3,12 +3,13 @@ from flask import *
 
 # Import SQLAlchemy
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
 
 from functools import wraps
 
 # Define the WSGI application object
 app = Flask(__name__)
-
+CORS(app)
 # Configurations
 app.config.from_object('config')
 
@@ -40,6 +41,7 @@ from app.utils.user.controllers import mod_user
 
 # Register blueprint(s)
 app.register_blueprint(mod_vehicle)
+app.register_blueprint(mod_item)
 #app.register_blueprint(mod_todo)
 
 # Build the database:
