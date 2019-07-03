@@ -14,6 +14,16 @@
     <link href="css/main.css" rel="stylesheet">
     <link href="css/responsive.css" rel="stylesheet">
     
+
+
+
+
+    <title>ClientApp</title>
+    <script type="text/javascript" src="../static/cookie.js"></script>
+    <link rel="stylesheet" type="text/css" href="../static/client.css">
+
+
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="../static/JsBarcode.all.min.js"></script>
@@ -29,7 +39,31 @@
 
 
 
+    <nav class="n2" class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+            </div>
+            <p></p>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="https://www.walmart.com/">Home</a></li>
+                    <li class="active"><a href="#">About Us</a></li>
+                    <li class="active"><a href="index.html">Track the location</a></li>
+                    <li class="active"><a href="checkpoints.html">Checkpoints</a></li>
+                    <li class="active"><a href="/addAddress" target="_blank">Add Address</a></li>
+                    <!-- <li class="active"><a href="/viewAddress" target="_blank">View Address</a></li> -->
 
+
+
+                    
 
     
     <!--[if lt IE 9]>
@@ -359,8 +393,32 @@
         <script src="js/main.js"></script>
         <script>
             document.getElementById("bttn").addEventListener("click", function() {
+            var ck=getCookie("username")
+            if(ck=="")
+            {
+                window.location.replace("http://127.0.0.1:8080/login");
+            }
+            document.getElementById('xyz').innerHTML=ck;
+            document.getElementById("btn").addEventListener("click", function() {
                 document.getElementById("bot").style.display = "block";
             });
+function get_addr1(){
+        // console.log(lat_lng.lat(),lat_lng.lng(),full_address);
+            $.ajax({
+  url:'http://127.0.0.1:8080/getAddr',
+  method:'POST',
+  data:{client_id:getCookie("username")},
+  success:function(response)
+  {
+    console.log(response);
+    // alert("Address Saved");
+    // window.location.replace("http://localhost:8080");
+      ////console.log(response);
+  },
+    });
+
+      }
+
         </script>
     </body>
     </html>

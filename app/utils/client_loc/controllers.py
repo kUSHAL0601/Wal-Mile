@@ -27,3 +27,14 @@ def create_clientlocation():
         return jsonify(success=False, message="This address already exists"), 400
 
     return jsonify(success=True)
+
+@mod_clientlocation.route('/getAddr', methods=['POST'])
+def getAddr():
+    client_id = request.form['client_id']
+    u=ClientLocation.query.filter(ClientLocation.client_id==client_id).all()
+    import json
+    ans=[]
+    for i in u:
+        ans.append([i.latitude,i.longitude,i.location])
+    print(ans)
+    return jsonify(ans)

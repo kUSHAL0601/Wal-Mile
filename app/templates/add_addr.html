@@ -4,6 +4,7 @@
     <title>Place Autocomplete</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="../static/cookie.js"></script>
     <meta charset="utf-8">
     <style>
       /* Always set the map height explicitly to define the size of the div
@@ -218,11 +219,11 @@
             $.ajax({
   url:'http://127.0.0.1:8080/clientlocation',
   method:'POST',
-  data:{client_id:1,latitude:lat_lng.lat(),longitude:lat_lng.lng(),location:full_address},
+  data:{client_id:getCookie("username"),latitude:lat_lng.lat(),longitude:lat_lng.lng(),location:full_address},
   success:function(response)
   {
     alert("Address Saved");
-    window.location="http://localhost:8080/"
+    self.close();
       ////console.log(response);
   },
   error:function(response)

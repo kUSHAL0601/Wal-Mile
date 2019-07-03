@@ -4,6 +4,8 @@
 <head>
     <title>LOGIN</title>
     <link href="https://fonts.googleapis.com/css?family=Alegreya" rel="stylesheet">
+<script type="text/javascript" src="../static/cookie.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>    <link href="https://fonts.googleapis.com/css?family=Alegreya" rel="stylesheet">
     <style type="text/css">
         h1 {
             text-align: center;
@@ -22,7 +24,7 @@
             border-radius: 30px;
         }
         
-        form {
+        div {
             text-align: center;
             padding: 15px 15px;
             border: 3px black solid;
@@ -53,25 +55,50 @@
 
 <body>
     <h1>LOGIN<i class="fa fa-user"></i></h1>
-    <form action="clientV1.html" method=POST>
+    <div action="clientV1.html" method=POST>
         <p>
 
             <label>
 	User Name
-	<input name="user"placeholder="your user name" required>
+	<input name="user"placeholder="your user name" id="l_name" required>
 </label>
         </p>
         <p>
             <label>
 	Password:
-	<input name="pswrd" type="password" placeholder="your password" pattern=.{5,} required title="password must be atleast/minimum 5 characters" >
+	<input name="pswrd" type="password" placeholder="your password" id="l_pwd" pattern=.{5,} required title="password must be atleast/minimum 5 characters" >
 </label>
         </p>
         <p>
-            <button>Submit</button>
-            <input type="hidden" name="redirect" value="clientV1.html">
+            <button onclick="login()">Submit</button>
+            <!-- <input type="hidden" name="redirect" value="clientV1.html"> -->
         </p>
-    </form>
+    </div>
 </body>
-
+<script type="text/javascript">
+    function login()
+{
+    $.ajax({
+        url:'http://127.0.0.1:8080/login',
+        method:'POST',
+        data:{username:$('#l_name').val(),password:$('#l_pwd').val()},
+        success:function(response)
+            {
+                if(response.success==true)
+                {
+                        setCookie("username",$('#l_name').val(),1000);
+                    window.location = "http://127.0.0.1:8080/";
+                }
+                else
+                {
+                    alert("Invalid Credentials");
+                }
+            },
+            error: function(response)
+        {
+            alert("Invalid Credentials");
+        },
+    });
+}
+</script>
 </html>

@@ -1,5 +1,6 @@
 # Import flask and template operators
 from flask import *
+from flask_session import Session
 
 # Import SQLAlchemy
 from flask_sqlalchemy import SQLAlchemy
@@ -10,8 +11,10 @@ from functools import wraps
 # Define the WSGI application object
 app = Flask(__name__)
 CORS(app)
-# Configurations
+app.secret_key = 'super secret key'
 app.config.from_object('config')
+app.config['SESSION_TYPE'] = 'filesystem'
+Session(app)# Configurations
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -32,21 +35,22 @@ def requires_auth(f):
         return f(*args, **kwargs)
     return decorated
 
-@app.route('/', methods=['GET'])
-def home_page():
-    return render_template('input.html')
+# @app.route('/', methods=['GET'])
+# def home_page():
+#     return render_template('input.html')
 
 # Import a module / component using its blueprint handler variable (mod_auth)
 from app.utils.vehicles.controllers import mod_vehicle
 from app.utils.item.controllers import mod_item
-from app.utils.user.controllers import mod_user
 from app.utils.client_loc.controllers import mod_clientlocation
+from app.utils.user.controllers import mod_user
 
 
 # Register blueprint(s)
 app.register_blueprint(mod_vehicle)
 app.register_blueprint(mod_item)
 app.register_blueprint(mod_clientlocation)
+app.register_blueprint(mod_user)
 #app.register_blueprint(mod_todo)
 
 # Build the database:
