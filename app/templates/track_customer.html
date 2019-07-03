@@ -1,0 +1,116 @@
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Vehicle route for customer</title>
+    <style type="text/css">
+        body
+        {
+            font-family: Arial;
+        }
+    </style>
+  </head>
+  <body>
+    <script>
+    	var map;
+    	var origin_location;
+    	var destination_location;
+      	var marker;
+      	var route;
+      	var geocoder;
+      	var i = 0;
+      function initMap() {
+      	origin_location = new google.maps.LatLng(19.1760, 72.7954);
+      destination_location = new google.maps.LatLng(19.2, 72.8);
+      geocoder = new google.maps.Geocoder;
+      var latlng1 = {lat: 19.1760,lng: 72.7954};
+      geocoder.geocode({'location': latlng1},function(results,status){
+      	if(status === 'OK')
+      	document.getElementById("start").innerHTML = results[0].formatted_address;
+      else document.getElementById("start").innerHTML = "error mofo";
+      });
+      var latlng2 = {lat: 19.2,lng: 72.8};
+      geocoder.geocode({'location': latlng2},function(results,status){
+      	document.getElementById("end").innerHTML = results[0].formatted_address;
+      });
+        var markerArray = [];
+
+        // Instantiate a directions service.
+        var directionsService = new google.maps.DirectionsService;
+
+        // Create a map and center it on Manhattan.
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 13,
+          center: {lat: 19.1363, lng: 72.8277},
+          disableDefaultUI: 1,
+	      draggable: 1,
+	      zoomControl: 1,
+	      fullscreenControl: 1,
+        });
+
+        marker = new google.maps.Marker({position: {lat: 19.1760, lng: 72.7954},map: map});
+        // Create a renderer for directions and bind it to the map.
+        var directionsDisplay = new google.maps.DirectionsRenderer({map: map});
+
+        // Instantiate an info window to hold step text.
+        var stepDisplay = new google.maps.InfoWindow;
+
+        // Display the route between the initial start and end selections.
+        calculateAndDisplayRoute(
+            directionsDisplay, directionsService, markerArray, stepDisplay, map);
+        window.setInterval(function(){setMarker()},500);
+      }
+
+
+      function calculateAndDisplayRoute(directionsDisplay, directionsService,
+          markerArray, stepDisplay, map) {
+        // First, remove any existing markers from the map.
+        for (var i = 0; i < markerArray.length; i++) {
+          markerArray[i].setMap(null);
+        }
+        directionsService.route({
+          origin: origin_location,
+          destination: destination_location,
+          travelMode: 'DRIVING'
+        }, function(response, status) {
+          if (status === 'OK') {
+            directionsDisplay.setDirections(response);
+            route = response;
+          } else {
+            window.alert('Directions request failed due to ' + status);
+          }
+        });
+      }
+
+      function setMarker(){
+      	geocoder.geocode({'location': route.routes[0].overview_path[i]},function(results,status){
+      	document.getElementById("current").innerHTML = results[0].formatted_address;
+        });
+      	if(i != route.routes[0].overview_path.length)
+      	{
+      	if(marker != null) marker.setMap(null);
+      	marker = new google.maps.Marker({position: route.routes[0].overview_path[i],map: map,});
+      	marker.setIcon("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4Igp3aWR0aD0iMjQiIGhlaWdodD0iMjQiCnZpZXdCb3g9IjAgMCAxNzIgMTcyIgpzdHlsZT0iIGZpbGw6IzAwMDAwMDsiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQuOTg4LDQuOTg4KSBzY2FsZSgwLjk0MiwwLjk0MikiPjxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0ibm9uemVybyIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJidXR0IiBzdHJva2UtbGluZWpvaW49Im5vbmUiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgc3Ryb2tlLWRhc2hhcnJheT0iIiBzdHJva2UtZGFzaG9mZnNldD0iMCIgZm9udC1mYW1pbHk9Im5vbmUiIGZvbnQtd2VpZ2h0PSJub25lIiBmb250LXNpemU9Im5vbmUiIHRleHQtYW5jaG9yPSJub25lIiBzdHlsZT0ibWl4LWJsZW5kLW1vZGU6IG5vcm1hbCI+PGcgZmlsbD0iIzBhZjMyZCIgc3Ryb2tlPSIjMDAwMDAwIiBzdHJva2Utd2lkdGg9IjEwIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNNDEuNDQsNTEuOTRsNS4zOSwyMy4zNmwwLjY2LDQuNWwwLjk2LC00LjA1bDYuNzUsLTIzLjgxaDMuNzlsNi41OSwyMy44MWwwLjk0LDQuMTJsMC43MiwtNC41OWw1LjMsLTIzLjM0aDQuNTJsLTguMjcsMzQuMTJoLTQuMWwtNy4wMywtMjQuODdsLTAuNTQsLTIuNmwtMC41NCwyLjZsLTcuMjksMjQuODdoLTQuMWwtOC4yNSwtMzQuMTJ6Ij48L3BhdGg+PC9nPjxnIGlkPSJvcmlnaW5hbC1pY29uIDEiIGZpbGw9IiNlZjIwMjAiIHN0cm9rZT0iIzAwMDAwMCIgc3Ryb2tlLXdpZHRoPSIxMCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTkzLjE2NjY3LDIxLjVjMy45NDE2NywwIDcuMTY2NjcsMy4yMjUgNy4xNjY2Nyw3LjE2NjY3djE0LjMzMzMzaDI4LjM4NjcyYzcuNDUzMzMsMCAxNC4zOTQ5MiwzLjkzOTQzIDE4LjMzNjU4LDEwLjI0NjA5bDE0LjU1NzI5LDIzLjY1NTZjMi4xNSwzLjQ0IDMuMjE5NCw3LjMxMDU2IDMuMjE5NCwxMS4zMjM4OXYzMy42MDc3NWMwLDMuOTQxNjcgLTMuMjI1LDcuMTY2NjcgLTcuMTY2NjcsNy4xNjY2N2gtNy41MzA2Yy0xLjc1NjExLDEyLjEyNjMzIC0xMi4xMTQwMywyMS41IC0yNC43MTk0LDIxLjVjLTEyLjYwNTM3LDAgLTIyLjk2MzI5LC05LjM3MzY3IC0yNC43MTk0LC0yMS41aC0yOS4zOTQ1M2MtMS43NTYxMSwxMi4xMjYzMyAtMTIuMTE0MDMsMjEuNSAtMjQuNzE5NCwyMS41Yy0xMi42MDUzNywwIC0yMi45NjMyOSwtOS4zNzM2NyAtMjQuNzE5NCwtMjEuNWgtMC4zNjM5M2MtMy45NDE2NywwIC03LjE2NjY3LC0zLjIyNSAtNy4xNjY2NywtNy4xNjY2N3YtOTMuMTY2NjdjMCwtMy45NDE2NyAzLjIyNSwtNy4xNjY2NyA3LjE2NjY3LC03LjE2NjY3ek0xMDAuMzMzMzMsMTE0LjY2NjY3aDIuNTE5NTNjNC4wNDIwMiwtOC40NDI3OCAxMi41OTQ5NywtMTQuMzMzMzMgMjIuNTYzODEsLTE0LjMzMzMzYzkuOTY4ODQsMCAxOC41MjE3OCw1Ljg5MDU1IDIyLjU2MzgxLDE0LjMzMzMzaDIuNTE5NTN2LTI2LjQ0MTA4YzAsLTEuMzYxNjcgLTAuMzYxMTQsLTIuNjYwNjIgLTEuMDc3OCwtMy44MDcyOWwtMTQuNjEzMjgsLTIzLjY0MTZjLTEuMjksLTIuMTUgLTMuNTgwNTMsLTMuNDQzMzYgLTYuMDg4ODYsLTMuNDQzMzZoLTI4LjM4Njcyek0zNS44MzMzMywxMjUuNDE2NjdjMCw1LjkyNjgzIDQuODIzMTcsMTAuNzUgMTAuNzUsMTAuNzVjNS45MjY4MywwIDEwLjc1LC00LjgyMzE3IDEwLjc1LC0xMC43NWMwLC01LjkyNjgzIC00LjgyMzE3LC0xMC43NSAtMTAuNzUsLTEwLjc1Yy01LjkyNjgzLDAgLTEwLjc1LDQuODIzMTcgLTEwLjc1LDEwLjc1ek0xMTQuNjY2NjcsMTI1LjQxNjY3YzAsNS45MjY4MyA0LjgyMzE3LDEwLjc1IDEwLjc1LDEwLjc1YzUuOTI2ODMsMCAxMC43NSwtNC44MjMxNyAxMC43NSwtMTAuNzVjMCwtNS45MjY4MyAtNC44MjMxNywtMTAuNzUgLTEwLjc1LC0xMC43NWMtNS45MjY4MywwIC0xMC43NSw0LjgyMzE3IC0xMC43NSwxMC43NXoiPjwvcGF0aD48L2c+PHBhdGggZD0iTTAsMTcydi0xNzJoMTcydjE3MnoiIGZpbGw9Im5vbmUiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2UtbGluZWpvaW49Im1pdGVyIj48L3BhdGg+PGcgaWQ9Im9yaWdpbmFsLWljb24iIGZpbGw9IiNlZjIwMjAiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2UtbGluZWpvaW49Im1pdGVyIj48cGF0aCBkPSJNMjEuNSwyMS41Yy0zLjk0MTY3LDAgLTcuMTY2NjcsMy4yMjUgLTcuMTY2NjcsNy4xNjY2N3Y5My4xNjY2N2MwLDMuOTQxNjcgMy4yMjUsNy4xNjY2NyA3LjE2NjY3LDcuMTY2NjdoMC4zNjM5M2MxLjc1NjExLDEyLjEyNjMzIDEyLjExNDAzLDIxLjUgMjQuNzE5NCwyMS41YzEyLjYwNTM3LDAgMjIuOTYzMjksLTkuMzczNjcgMjQuNzE5NCwtMjEuNWgyOS4zOTQ1M2MxLjc1NjExLDEyLjEyNjMzIDEyLjExNDAzLDIxLjUgMjQuNzE5NCwyMS41YzEyLjYwNTM3LDAgMjIuOTYzMjksLTkuMzczNjcgMjQuNzE5NCwtMjEuNWg3LjUzMDZjMy45NDE2NywwIDcuMTY2NjcsLTMuMjI1IDcuMTY2NjcsLTcuMTY2Njd2LTMzLjYwNzc1YzAsLTQuMDEzMzMgLTEuMDY5NCwtNy44ODM4OSAtMy4yMTk0LC0xMS4zMjM4OWwtMTQuNTU3MjksLTIzLjY1NTZjLTMuOTQxNjcsLTYuMzA2NjcgLTEwLjg4MzI2LC0xMC4yNDYwOSAtMTguMzM2NTgsLTEwLjI0NjA5aC0yOC4zODY3MnYtMTQuMzMzMzNjMCwtMy45NDE2NyAtMy4yMjUsLTcuMTY2NjcgLTcuMTY2NjcsLTcuMTY2Njd6TTEwMC4zMzMzMyw1Ny4zMzMzM2gyOC4zODY3MmMyLjUwODMzLDAgNC43OTg4NiwxLjI5MzM2IDYuMDg4ODYsMy40NDMzNmwxNC42MTMyOCwyMy42NDE2YzAuNzE2NjcsMS4xNDY2NyAxLjA3NzgsMi40NDU2MyAxLjA3NzgsMy44MDcyOXYyNi40NDEwOGgtMi41MTk1M2MtNC4wNDIwMiwtOC40NDI3OCAtMTIuNTk0OTcsLTE0LjMzMzMzIC0yMi41NjM4MSwtMTQuMzMzMzNjLTkuOTY4ODQsMCAtMTguNTIxNzgsNS44OTA1NSAtMjIuNTYzODEsMTQuMzMzMzNoLTIuNTE5NTN6TTQ2LjU4MzMzLDExNC42NjY2N2M1LjkyNjgzLDAgMTAuNzUsNC44MjMxNyAxMC43NSwxMC43NWMwLDUuOTI2ODMgLTQuODIzMTcsMTAuNzUgLTEwLjc1LDEwLjc1Yy01LjkyNjgzLDAgLTEwLjc1LC00LjgyMzE3IC0xMC43NSwtMTAuNzVjMCwtNS45MjY4MyA0LjgyMzE3LC0xMC43NSAxMC43NSwtMTAuNzV6TTEyNS40MTY2NywxMTQuNjY2NjdjNS45MjY4MywwIDEwLjc1LDQuODIzMTcgMTAuNzUsMTAuNzVjMCw1LjkyNjgzIC00LjgyMzE3LDEwLjc1IC0xMC43NSwxMC43NWMtNS45MjY4MywwIC0xMC43NSwtNC44MjMxNyAtMTAuNzUsLTEwLjc1YzAsLTUuOTI2ODMgNC44MjMxNywtMTAuNzUgMTAuNzUsLTEwLjc1eiI+PC9wYXRoPjwvZz48cGF0aCBkPSIiIGZpbGw9Im5vbmUiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2UtbGluZWpvaW49Im1pdGVyIj48L3BhdGg+PHBhdGggZD0iIiBmaWxsPSJub25lIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIgc3Ryb2tlLWxpbmVqb2luPSJtaXRlciI+PC9wYXRoPjxwYXRoIGQ9IiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1saW5lam9pbj0ibWl0ZXIiPjwvcGF0aD48cGF0aCBkPSIiIGZpbGw9Im5vbmUiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2UtbGluZWpvaW49Im1pdGVyIj48L3BhdGg+PHBhdGggZD0iIiBmaWxsPSJub25lIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIgc3Ryb2tlLWxpbmVqb2luPSJtaXRlciI+PC9wYXRoPjxwYXRoIGQ9IiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1saW5lam9pbj0ibWl0ZXIiPjwvcGF0aD48cGF0aCBkPSIiIGZpbGw9Im5vbmUiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2UtbGluZWpvaW49Im1pdGVyIj48L3BhdGg+PHBhdGggZD0iIiBmaWxsPSJub25lIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIgc3Ryb2tlLWxpbmVqb2luPSJtaXRlciI+PC9wYXRoPjxwYXRoIGQ9IiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1saW5lam9pbj0ibWl0ZXIiPjwvcGF0aD48cGF0aCBkPSIiIGZpbGw9Im5vbmUiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2UtbGluZWpvaW49Im1pdGVyIj48L3BhdGg+PHBhdGggZD0iIiBmaWxsPSJub25lIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIgc3Ryb2tlLWxpbmVqb2luPSJtaXRlciI+PC9wYXRoPjxwYXRoIGQ9IiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1saW5lam9pbj0ibWl0ZXIiPjwvcGF0aD48cGF0aCBkPSIiIGZpbGw9Im5vbmUiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2UtbGluZWpvaW49Im1pdGVyIj48L3BhdGg+PHBhdGggZD0iIiBmaWxsPSJub25lIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIgc3Ryb2tlLWxpbmVqb2luPSJtaXRlciI+PC9wYXRoPjxwYXRoIGQ9IiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1saW5lam9pbj0ibWl0ZXIiPjwvcGF0aD48ZyBmaWxsPSIjMGFmMzJkIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIgc3Ryb2tlLWxpbmVqb2luPSJtaXRlciI+PHBhdGggZD0iTTQxLjQ0LDUxLjk0bDUuMzksMjMuMzZsMC42Niw0LjVsMC45NiwtNC4wNWw2Ljc1LC0yMy44MWgzLjc5bDYuNTksMjMuODFsMC45NCw0LjEybDAuNzIsLTQuNTlsNS4zLC0yMy4zNGg0LjUybC04LjI3LDM0LjEyaC00LjFsLTcuMDMsLTI0Ljg3bC0wLjU0LC0yLjZsLTAuNTQsMi42bC03LjI5LDI0Ljg3aC00LjFsLTguMjUsLTM0LjEyeiI+PC9wYXRoPjwvZz48cGF0aCBkPSJNMjYuOTQsOTYuMDZ2LTU0LjEyaDYwLjEydjU0LjEyeiIgZmlsbD0iI2ZmMDAwMCIgc3Ryb2tlPSIjNTBlM2MyIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lam9pbj0ibWl0ZXIiIG9wYWNpdHk9IjAiPjwvcGF0aD48cGF0aCBkPSIiIGZpbGw9Im5vbmUiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2UtbGluZWpvaW49Im1pdGVyIj48L3BhdGg+PC9nPjwvZz48L3N2Zz4=");
+      	i = i + 1;
+      }
+      else
+      {
+      	window.alert("Vehicle reached to destination. Please collect the order")
+      }
+      }
+
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCU4U5pUtL25ggXxxVKkMFqVjqM0ojvW9s&callback=initMap">
+    </script>
+
+    <div id="map" style="height: 400px;width: 600px;margin-left: 250"></div>
+    <br><br>
+    <div style="margin-left: 250">
+    	<b>Start Station: </b><font size="3" id="start"></font><br>
+	    <b>End Station: </b><font size="3" id="end"></font><br>
+	    <b>Current Location: </b><font size="3" id="current"></font><br>
+	    <b>Estimated Time of Arrival: </b><font size="3" id="eta"></font><br>
+    </div>
+  </body>
+</html>
