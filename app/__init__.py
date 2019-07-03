@@ -34,8 +34,6 @@ def requires_auth(f):
 
 @app.route('/', methods=['GET'])
 def home_page():
-    # if 'user_id' in session:
-    #     return redirect("/dashboard",code=302)
     return render_template('input.html')
 
 # Import a module / component using its blueprint handler variable (mod_auth)
