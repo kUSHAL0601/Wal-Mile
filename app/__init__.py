@@ -31,12 +31,17 @@ def requires_auth(f):
         return f(*args, **kwargs)
     return decorated
 
+@app.route('/', methods=['GET'])
+def home_page():
+    # if 'user_id' in session:
+    #     return redirect("/dashboard",code=302)
+    return render_template('input.html')
+
 # Import a module / component using its blueprint handler variable (mod_auth)
 from app.utils.vehicles.controllers import mod_vehicle
 from app.utils.item.controllers import mod_item
 from app.utils.user.controllers import mod_user
 
-#from app.todo.controllers import mod_todo
 
 # Register blueprint(s)
 app.register_blueprint(mod_vehicle)

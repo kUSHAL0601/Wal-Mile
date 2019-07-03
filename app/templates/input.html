@@ -10,17 +10,35 @@
     <title>Input</title>
 </head>
 <body>
+    <div class="container">
+        
+        <div class="form-group1">
+            <h1>Warehouse Locations <small>Coordinates</small></h1>
+            <form role="form">
+                <input type="text" class="form-control" placeholder="Your Task" name="task1">
+            </form>
+            <button type="button" id="but1" class="btn btn btn-primary">Add</button>
+        </div>
+        <div></div>
+        <ul class="list-unstyled" id="todo1"></ul>
+        
+        <div class="form-group">
+            <h1>Delivery Locations <small>Coordinates</small></h1>
+            <form role="form">
+                <input type="text" class="form-control" placeholder="Your Task" name="task2">
+            </form>
+            <button type="button" id="but2" class="btn btn btn-primary">Add</button>
+        </div>
+        <div></div>
+        <ul class="list-unstyled" id="todo2"></ul>
+        
+    </div>
     
-    <div class="form-group">
-        <h1>To-Do <small>List</small></h1>
-      <form role="form">
-          <input type="text" class="form-control" placeholder="Your Task" name="task">
-      </form>
-      <button type="button" class="btn btn btn-primary">Add</button>
-          </div>
-          <div></div>
-      <ul class="list-unstyled" id="todo"></ul>
+    
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <script src="../static/input.js"></script>
 </body>
 </html>
 
