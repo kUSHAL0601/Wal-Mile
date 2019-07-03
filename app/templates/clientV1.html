@@ -2,9 +2,66 @@
 <html>
 
 <head>
-    <title>Page2</title>
-    <link rel="stylesheet" type="text/css" href="page2.css">
+    <title>ClientApp</title>
+    <link rel="stylesheet" type="text/css" href="..static/client.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+        body {
+            background: #1D976C;
+            /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #93F9B9, #1D976C);
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #93F9B9, #1D976C);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        }
+        
+        #bot {
+            float: right;
+            align: right;
+        }
+        
+        h1 {
+            text-align: center;
+            font-size: 60px;
+            font-color: blue;
+            font-weight: bold;
+            text-shadow: 0px 4px 3px red, 0px 8px 13px orange, 0px 18px 23px yellow;
+        }
+        
+        p :hover {
+            color: #0000FF;
+        }
+        
+        input:hover {
+            box-sizing: 20px;
+            box-shadow: inset 0 1.5px 3px rgba(190, 190, 190, .7) 0 0 0 5px #fff;
+            border-radius: 30px;
+        }
+        
+        input {
+            background: #1D976C;
+            /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #93F9B9, #1D976C);
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #93F9B9, #1D976C);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            box-sizing: 20px;
+            box-shadow: inset 0 1.5px 3px rgba(190, 190, 190, .7) 0 0 0 5px #fff;
+            border-radius: 30px;
+        }
+        
+        #btn {
+            background: #1D976C;
+            /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #93F9B9, #1D976C);
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #93F9B9, #1D976C);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            box-sizing: 2px;
+            box-shadow: inset 0 1.5px 3px rgba(190, 190, 190, .7) 0 0 0 5px #fff;
+            border-radius: 30px;
+        }
+    </style>
 
 </head>
 
@@ -19,15 +76,17 @@
         <span class="icon-bar"></span>
       </button>
 
-                <a href="#" class="navbar-brand"><b>Wal-Mile</b></a>
+                <a float="left" href="#" class="navbar-brand"><b>Wal-Mile</b></a>
             </div>
             <div class="collapse navbar-collapse" id="bs-nav-demo">
                 <ul class="nav navbar-nav">
-                    <li><a href="#">Walmart</a></li>
+                    <li>
+                        <a href="#">Walmart</a>
+                    </li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
+                <!-- <ul class="nav navbar-nav navbar-right">
                     <li><a href="#">About Us</a></li>
-                </ul>
+                    <img> </ul> -->
             </div>
         </div>
     </nav>
@@ -50,34 +109,25 @@
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="https://www.walmart.com/">Home</a></li>
                     <li class="active"><a href="#">About Us</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Map the Location<span class="caret"></span></a>
-                        <!-- <ul class="dropdown-menu">
-                            <li><a href="#">a</a></li>
-                            <li><a href="#">b</a></li>
-                            <li><a href="#">c</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">ABC</a></li>
-                            
-                        </ul> -->
-                    </li>
+                   <li class="active"><a href="index.html">Map the location</a></li>
+                    
 
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Verification <span class="caret"></span></a>
+                        <a href="barcode.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Verification <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Bar Code</a></li>
+                            <li><a href="barcode.html">Bar Code</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#">OTP</a></li>
+                            <li><a href="barcode.html">OTP</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Products<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="#"></a>
+                                <a href="#">Item1</a>
                             </li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#">OTP</a></li>
+                            <li><a href="#">Item2</a></li>
                         </ul>
                     </li>
                     <li><a href="#">Feedback</a></li>
@@ -85,9 +135,11 @@
 
                 <form class="navbar-form navbar-right">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search">
+                        <!-- <input type="text" class="form-control" placeholder="Search"> -->
+                        <p><img width="17 " src="..static/user1.png"></p>
+                        <p>Sam</p>
                     </div>
-                    <button type="submit" class="btn btn-default">Submit</button>
+                    <!-- <button type="submit" class="btn btn-default">Submit</button> -->
                 </form>
             </div>
             <!-- /.navbar-collapse -->
@@ -105,21 +157,47 @@
 
     </p>
     <center><img id="logo" width="200" src="https://www.edcast.com/corp/wp-content/uploads/2016/11/Walmart-Logo-PNG-Transparent.png"></center>
-    <div float="bottom-left" id="abtus ">
-        <h3>Contact us:</h3>
-        <p><img width="17 " src="http://4.bp.blogspot.com/-UY_5--dpg0U/U5tgb3tixJI/AAAAAAAAGT4/Kzc4BKJbqPA/s1600/location-icon.png "> Walmart </p>
-        <p> Walmart Address</p>
-        <p><img width="17 " src="http://image.flaticon.com/icons/svg/37/37462.svg "> +00(123) 4567890-</p>
-        <p><img width="17 " src="http://www.clipartbest.com/cliparts/yik/enG/yikenG85T.jpeg ">
-            <a href="www.walmart@gmail.com "></a>walmart@gmail.com </p>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.2.1.js " integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin=" anonymous "></script>
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js " integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa " crossorigin="anonymous "></script>
+    <center>
+        <div>
+            <p>
+                <label>
+    Number of items:
+    <input name="Qty"value="4" required>
+    </label>
+            </p>
+            <p>
+                <label>Expected delivery time: 
+    <input name="time" required value="20/7/2018 08:30" >
+    </label>
+            </p>
+        </div>
+    </center>
+    <div class="bel">
+
+        <div float="left" id="abtus ">
+            <h3>Contact us:</h3>
+            <p><img width="17 " src="http://4.bp.blogspot.com/-UY_5--dpg0U/U5tgb3tixJI/AAAAAAAAGT4/Kzc4BKJbqPA/s1600/location-icon.png "> Walmart </p>
+            <p> Walmart Address</p>
+            <p><img width="17 " src="http://image.flaticon.com/icons/svg/37/37462.svg "> +00(123) 4567890-</p>
+            <p><img width="17 " src="http://www.clipartbest.com/cliparts/yik/enG/yikenG85T.jpeg ">
+                <a href="www.walmart@gmail.com "></a>walmart@gmail.com </p>
+
+            <div float="right" id="bot">
+                <!-- "style: float:right; " id="bot" -->
+                <iframe allow="microphone; " width=" 350 " height="250 " src="https://console.dialogflow.com/api-client/demo/embedded/33a5d772-a049-417e-b29c-76a65623cd4b "></iframe>
+            </div>
+            <button float="right" id="btn">ChatBot</button>
+            <div "style: clear:both; "></div>
+        </div>
+
+        <script>
+            document.getElementById("btn").addEventListener("click", function() {
+                document.getElementById("bot").style.display = "block";
+            });
+        </script>
+        <script src="https://code.jquery.com/jquery-3.2.1.js " integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin=" anonymous "></script>
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js " integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa " crossorigin="anonymous "></script>
 </body>
 
 </html>
-<div float="bottom-right" align=" right ">
-    <iframe allow="microphone; " width="350 " height="430 " src="https://console.dialogflow.com/api-client/demo/embedded/33a5d772-a049-417e-b29c-76a65623cd4b ">
-</iframe>
-</div>
