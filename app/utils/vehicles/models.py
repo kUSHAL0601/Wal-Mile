@@ -5,7 +5,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 class Vehicle(db.Model):
     __tablename__ = 'vehicles'
     vehicle_no = db.Column(db.String(255), primary_key=True)
-    present_location = db.Column(db.String(255), unique=True)
+    present_location = db.Column(db.String(255))
     driver_name= db.Column(db.String(255))
     capacity = db.Column(db.Integer)
     base_cost = db.Column(db.String(255))
