@@ -9,47 +9,22 @@ mod_user = Blueprint('user', __name__)
 
 @mod_user.route('/', methods=['GET'])
 def home_page():
-    # if 'user_id' in session:
-    #     return redirect("/dashboard",code=302)
-    return render_template('/clientV1.html',xyz=session['user_id'])
+    if 'user_id' in session:
+        return render_template('clientV1.html',xyz=session['user_id'])
+    else:
+        return render_template('signup.html')
 
 @mod_user.route('/login', methods=['GET'])
 def login_page():
     # if 'user_id' in session:
     #     return redirect("/dashboard",code=302)
-    return render_template('/login.html')
+    return render_template('login.html')
 
 @mod_user.route('/signup', methods=['GET'])
 def signup_page():
     # if 'user_id' in session:
     #     return redirect("/dashboard",code=302)
-    return render_template('/signup.html')
-
-@mod_user.route('/dashboard', methods=['GET'])
-def dashboard_page():
-    return render_template('dashboard.html')
-
-@mod_user.route('/playlists', methods=['GET'])
-def playlists_page():
-    return render_template('playlist.html')
-
-@mod_user.route('/plsredirecttodash', methods=['POST'])
-def red_dashboard_page():
-    try:
-        session['DoReload']=1;
-        return jsonify(success=True),200
-    except:
-        return jsonify(success=False),400
-
-@mod_user.route('/reloadDone', methods=['POST'])
-def rel_dashboard_page():
-    if(session['DoReload']!=1):
-        return jsonify(success=True),200
-    try:
-        session['DoReload']=0;
-        return jsonify(success=True),200
-    except:
-        return jsonify(success=False),400
+    return render_template('signup.html')
 
 
 @mod_user.route('/viewlogin', methods=['GET'])
@@ -88,6 +63,7 @@ def create_user():
         name = request.form['name']
         username = request.form['username']
         password = request.form['password']
+        # print(name,username,password)
     except KeyError as e:
         return jsonify(success=False, message="%s not sent in the request" % e.args), 400
 
@@ -95,9 +71,11 @@ def create_user():
     db.session.add(u)
     try:
         db.session.commit()
+        print(u.id)
     except IntegrityError as e:
         return jsonify(success=False, message="This username already exists"), 400
-
+    # print("Here1")
+    session['user_id']=u.id
     return jsonify(success=True)
 
 @mod_user.route('/edit/name',methods=['GET'])

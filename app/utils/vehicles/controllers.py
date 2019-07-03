@@ -41,11 +41,12 @@ def get_vehicle():
 
 @mod_vehicle.route('/vehicle/getAll', methods=['GET'])
 def get_vehicle_all():
+    import json
     all_items= Vehicle.query.filter("NA"=="NA").all()
     ans=[]
     for i in all_items:
         ans.append([i.vehicle_no,i.capacity])
-    return jsonify(ans)
+    return json.dumps(ans)
 
 
 @mod_vehicle.route('/vehicle/remove', methods=['POST'])

@@ -3,7 +3,7 @@
 
 <head>
     <title>Register</title>
-    <link href="https://fonts.googleapis.com/css?family=Alegreya" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>    <link href="https://fonts.googleapis.com/css?family=Alegreya" rel="stylesheet">
     <style type="text/css">
         h1 {
             text-align: center;
@@ -22,7 +22,7 @@
             border-radius: 30px;
         }
         
-        form {
+        div {
             text-align: center;
             padding: 15px 15px;
             border: 3px black solid;
@@ -53,32 +53,116 @@
 
 <body>
     <h1>SIGNUP<i class="fa fa-user"></i></h1>
-    <form action="clientV1.html" method=POST>
+    <div>
         <p>
-
-            <label>
+        <label>
             Name
-            <input name="name"placeholder="your name" required>
+            <input name="name"placeholder="your name" id="r_nm" required>
         </label>
         </p>
         <p>
 
             <label>
 	User Name
-	<input name="user"placeholder="your user name" required>
+	<input name="user" placeholder="your user name" id="r_name" required>
 </label>
         </p>
         <p>
             <label>
 	Password:
-	<input name="pswrd" type="password" placeholder="your password" pattern=.{5,} required title="password must be atleast/minimum 5 characters" >
+	<input name="pswrd" type="password" placeholder="your password" id="r_pwd" pattern=.{5,} required title="password must be atleast/minimum 5 characters" >
 </label>
         </p>
         <p>
-            <button>Submit</button>
-            <input type="hidden" name="redirect" value="clientV1.html">
+            <button onclick="register()">Submit</button>
+            <!-- <input type="hidden" name="redirect" value="clientV1.html"> -->
         </p>
-    </form>
+    </div>
 </body>
+<script type="text/javascript">
+    function validatePassword(p)
+{
+    errors = [];
+    if (p.length < 8) {
+        errors.push("Your password must be at least 8 characters"); 
+    }
+    if (p.search(/[a-z]/i) < 0) {
+        errors.push("Your password must contain at least one letter.");
+    }
+    if (p.search(/[0-9]/) < 0) {
+        errors.push("Your password must contain at least one numeric digit."); 
+    }
+    if(p.search(/[$_@#]/) <0)
+    {
+        errors.push("Your password must contain at least one special character among $,#,@,_");
+    }
 
+    if (errors.length > 0) {
+        alert(errors.join("\n"));
+        return false;
+    }
+    return true;
+}
+function validateName(nm)
+{
+    if (/^[a-zA-Z]+$/.test(nm)==true){
+        return true;
+    }
+    else
+    {
+        alert("Name can Contain only Alphabets");
+        return false;
+    }
+}
+function register()
+    {
+        var pwd=$('#r_pwd').val();
+        var cpwd=pwd;
+        var nm=$('#r_nm').val();
+        var uname=$('#r_name').val();
+        if(nm=='')
+        {
+            alert("Name Field Cannot Be Empty");
+            return;
+        }
+        if(uname =='')
+        {
+            alert("User-Name Field Cannot Be Empty");
+            return;
+        }
+        if(pwd!=cpwd)
+        {
+            alert("Enter Confirm Password Properly");
+            return;
+        }
+        // alert("Called")
+        if(validatePassword(pwd) && validateName(nm))
+        {
+            $.ajax({
+                url:'http://127.0.0.1:8080/register',
+                method:'POST',
+                data:{name:$('#r_nm').val(),username:$('#r_name').val(),password:$('#r_pwd').val()},
+                success:function(response)
+                {
+                    // alert("S")
+                    if(response.success==true)
+                    {
+                        alert("success");
+                        window.location="http://127.0.0.1:8080/"
+
+                    }
+                    else
+                    {
+                        console.log(response.success);
+                        alert("Invalid credentials");
+                    }
+                },
+                error:function(response)
+                {
+                    alert('Username already taken')
+                }
+            });
+        }
+}
+</script>
 </html>

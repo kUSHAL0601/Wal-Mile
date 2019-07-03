@@ -1,5 +1,6 @@
 # Import flask and template operators
 from flask import *
+from flask_session import Session
 
 # Import SQLAlchemy
 from flask_sqlalchemy import SQLAlchemy
@@ -10,7 +11,9 @@ from functools import wraps
 # Define the WSGI application object
 app = Flask(__name__)
 CORS(app)
-# Configurations
+app.secret_key = 'super secret key'
+app.config['SESSION_TYPE'] = 'filesystem'
+Session(app)# Configurations
 app.config.from_object('config')
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
