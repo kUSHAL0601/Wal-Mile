@@ -24,7 +24,7 @@ def create_item():
     except KeyError as e:
         return jsonify(success=False, message="%s not sent in the request" % e.args), 400
 
-    i = Item(height, weight, fragile, status, client_id, vehicle_no, weight)
+    i = Item(height, weight, fragile, status, client_id, vehicle_no, weight, "NA")
     db.session.add(i)
     try:
         db.session.commit()
@@ -56,3 +56,22 @@ def remove_item():
         return jsonify(success=False, message="This item already exists"), 400
 
     return jsonify(success=True)
+
+@mod_item.route('/VRP', methods=['GET'])
+def get_data():
+	client_ids = Item.query.filter(Item.status=="NOT_DELIVERED").all()
+	loc=[]
+	item_vol=[]
+	for i in client_ids:
+		loc.append(i.location)
+		item_vol.append(int(i.width)*int(i.height))
+	import urllib3
+	http = urllib3.PoolManager()
+	r=http.request("GET","localhost:8080/vehicle/getAll")
+	# print(r.data)
+	vehicle_nos=[]
+	vehicle_cap=[]
+	for i in r.data:
+		vehicle_nos.append(i[0])
+		vehicle_cap.append(i[1])
+	return r.data

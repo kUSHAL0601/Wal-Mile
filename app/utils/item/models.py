@@ -11,9 +11,10 @@ class Item(db.Model):
     client_id = db.Column(db.Integer)
     vehicle_no = db.Column(db.String(255))
     weight = db.Column(db.String(255))
+    location = db.Column(db.String(255))
 
 
-    def __init__(self, height, width, fragile, status,client_id, vehicle_no, weight):
+    def __init__(self, height, width, fragile, status,client_id, vehicle_no, weight, location):
         self.height = height
         self.width = width
         self.fragile = fragile
@@ -21,3 +22,4 @@ class Item(db.Model):
         self.vehicle_no = vehicle_no
         self.client_id = client_id
         self.weight = weight
+        self.location=location

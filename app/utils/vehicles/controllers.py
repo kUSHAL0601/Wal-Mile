@@ -39,6 +39,15 @@ def get_vehicle():
         ans.append([i.vehicle_no,i.driver_name,i.capacity,i.base_cost,i.cost_per_km])
     return jsonify(ans)
 
+@mod_vehicle.route('/vehicle/getAll', methods=['GET'])
+def get_vehicle_all():
+    all_items= Vehicle.query.filter("NA"=="NA").all()
+    ans=[]
+    for i in all_items:
+        ans.append([i.vehicle_no,i.capacity])
+    return jsonify(ans)
+
+
 @mod_vehicle.route('/vehicle/remove', methods=['POST'])
 def remove_item():
     try:
