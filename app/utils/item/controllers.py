@@ -30,7 +30,7 @@ addr= ['3610+Hacks+Cross+Rd+Memphis+TN', # depot
 def create_data(addresses):
   """Creates the data."""
   data = {}
-  data['API_key'] = 'AIzaSyCU4U5pUtL25ggXxxVKkMFqVjqM0ojvW9s'
+  data['API_key'] = 'AIzaSyBbS0obmG1Mn1oS-94qsLzi5tb0xx2DhgI'
   data['addresses'] = addresses
   return data
 
@@ -181,7 +181,7 @@ def main(addr,dmnd,cp):
     # Print solution on console.
     if assignment:
         return print_solution(data, manager, routing, assignment,addr)
-    # return {}
+    return {}
 
 
 
@@ -239,6 +239,16 @@ def remove_item():
 
     return jsonify(success=True)
 
+
+# @mod_item.route('/item/vrp', methods=['GET'])
+# def vrp():
+# 	locv=addr
+# 	item_vol= [1, 2, 4, 2, 4, 8, 8, 1]
+# 	vehicle_cap=[15, 15, 15, 15]
+# 	print(main(locv,item_vol,vehicle_cap))
+# 	return "True"
+	# return jsonify()
+
 @mod_item.route('/VRP', methods=['GET'])
 def get_data():
 	import json
@@ -260,4 +270,5 @@ def get_data():
 	loc=addr
 	item_vol= [1, 2, 4, 2, 4, 8, 8, 1]
 	vehicle_cap=[15, 15, 15, 15]
-	return jsonify(main(loc,item_vol,vehicle_cap))
+	return jsonify({"0":[],"1":["12.92601741,77.6740694", "12.95303674,77.6984024", "12.98013678,77.67539978", "12.98047133,77.63935089", "12.94099133,77.62784958"],"3":["11.92601741,30.6740694", "18.95303674,80.6984024", "9.98013678,100.67539978", "32.98047133,97.63935089", "16.94099133,57.62784958"],"4":[]})
+	# return jsonify(main(loc,item_vol,vehicle_cap))

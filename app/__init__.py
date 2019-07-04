@@ -44,6 +44,7 @@ from app.utils.vehicles.controllers import mod_vehicle
 from app.utils.item.controllers import mod_item
 from app.utils.client_loc.controllers import mod_clientlocation
 from app.utils.user.controllers import mod_user
+from app.utils.otp.controllers import mod_otp
 
 
 # Register blueprint(s)
@@ -51,6 +52,7 @@ app.register_blueprint(mod_vehicle)
 app.register_blueprint(mod_item)
 app.register_blueprint(mod_clientlocation)
 app.register_blueprint(mod_user)
+app.register_blueprint(mod_otp)
 #app.register_blueprint(mod_todo)
 
 # Build the database:
