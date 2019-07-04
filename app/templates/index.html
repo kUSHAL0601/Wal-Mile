@@ -32,8 +32,8 @@
 					<div class="col-sm-6">
 						<div class="contactinfo">
 							<ul class="nav nav-pills">
-								<li><a href="#"><i class="fa fa-phone"></i> +2 95 01 88 821</a></li>
-								<li><a href="#"><i class="fa fa-envelope"></i> info@domain.com</a></li>
+								<li><a href="#"><i class="fa fa-phone"></i> +91987654321</a></li>
+								<li><a href="#"><i class="fa fa-envelope"></i> info@walmart.com</a></li>
 							</ul>
 						</div>
 					</div>
@@ -86,7 +86,7 @@
 					<div class="col-sm-8">
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
-								<li><a href="#"><i class="fa fa-user"></i> Account</a></li>
+								<!-- <li><a href="#"><i class="fa fa-user"></i> Account</a></li> -->
 								<li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
 								<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
 								<li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
@@ -114,9 +114,9 @@
                         <div class="mainmenu pull-left">
                             <ul class="nav navbar-nav collapse navbar-collapse">
                                 <li><a href="index.html" class="active">Home</a></li>
-                                <li><a href="add_addr.html">Track the location</a></li>
-                                <li><a href="barcode.html">Verification</a></li>
-                                <li><a href="checkpoints.html">Checkpoints</a></li>
+                                <li><a href="add_addr.html">Add my location</a></li>
+                                <!-- <li><a href="barcode.html">Verification</a></li> -->
+                                <li><a href="track_customer.html">Track my package</a></li>
                             </ul>
                         </div>
                     </div>
@@ -149,8 +149,8 @@
 							<div class="item active">
 								<div class="col-sm-6">
 									<h1><span>Wal</span>-Mile</h1>
-									<h2>Free E-Commerce Template</h2>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+									<h2>Hussle free delivery</h2>
+									<p>Makes you feel like shopping. </p>
 									<button type="button" class="btn btn-default get">Get it now</button>
 								</div>
 								<div class="col-sm-6">
@@ -161,8 +161,8 @@
 							<div class="item">
 								<div class="col-sm-6">
 									<h1><span>Wal</span>-Mile</h1>
-									<h2>100% Responsive Design</h2>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+									<h2>Delivery at your doorstep</h2>
+									<p>Makes you feel like shopping. </p>
 									<button type="button" class="btn btn-default get">Get it now</button>
 								</div>
 								<div class="col-sm-6">
@@ -174,8 +174,8 @@
 							<div class="item">
 								<div class="col-sm-6">
 									<h1><span>Wal</span>-Mile</h1>
-									<h2>Free Ecommerce Template</h2>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+									<h2>Hussle free delivery</h2>
+									<p>Makes you feel like shopping. </p>
 									<button type="button" class="btn btn-default get">Get it now</button>
 								</div>
 								<div class="col-sm-6">
@@ -897,7 +897,7 @@
 					<div class="col-sm-2">
 						<div class="companyinfo">
 							<h2><span>wal</span>-mile</h2>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor</p>
+							<p>Makes you feel like shopping.</p>
 						</div>
 					</div>
 					<div class="col-sm-7">
@@ -1049,12 +1049,18 @@
 	</footer><!--/Footer-->
 	
 
-  
-    <script src="js/jquery.js"></script>
+	<script src="{{ url_for('static', filename='jquery.min.js') }}" type="text/javascript"></script>
+	<script src="{{ url_for('static', filename='bootstrap.min.js') }}" type="text/javascript"></script>
+	<script src="{{ url_for('static', filename='jquery.scrollUp.min.js') }}" type="text/javascript"></script>
+	<script src="{{ url_for('static', filename='price-range.js') }}" type="text/javascript"></script>
+	<script src="{{ url_for('static', filename='jquery.prettyPhoto.js') }}" type="text/javascript"></script>
+	<script src="{{ url_for('static', filename='main.js') }}" type="text/javascript"></script>
+
+    <!-- <script src="js/jquery.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery.scrollUp.min.js"></script>
 	<script src="js/price-range.js"></script>
     <script src="js/jquery.prettyPhoto.js"></script>
-    <script src="js/main.js"></script>
+    <script src="js/main.js"></script> -->
 </body>
 </html>
